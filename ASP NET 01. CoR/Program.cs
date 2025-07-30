@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿// ASP - Active Server Pages
+// VBScript - Visual Basic Scripting Edition
+
+// Chain Of Responsibility - CoR
+
+User user = new User("mr.13", "Salam123654", "zamanov@itstep.org");
+var director = new CheckDirector();
+Console.WriteLine(director.MakeUserChecker(user));
+
