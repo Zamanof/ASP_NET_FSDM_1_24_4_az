@@ -1,9 +1,14 @@
+using ASP_05._ASP_Filters.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews(o => o.Filters.Add(typeof(GlobalExceptionFilter)));
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

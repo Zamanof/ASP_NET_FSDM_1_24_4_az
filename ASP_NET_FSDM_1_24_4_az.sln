@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP 05. HTML Helpers", "ASP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP 05. ASP Filters", "ASP 05. ASP Filters\ASP 05. ASP Filters.csproj", "{5103A06A-3A76-45D2-AC52-ADD033B474C6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 06", "ASP 06", "{6E2FADDE-112C-4B0C-94C8-7BE552579FCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP 06. Students App (Pagination Filtering Sorting)", "ASP 06. Students App (Pagination, Filtering, Sorting)\ASP 06. Students App (Pagination Filtering Sorting).csproj", "{420EDDA0-2085-4827-ABD6-1F4BE045802C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +101,10 @@ Global
 		{5103A06A-3A76-45D2-AC52-ADD033B474C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5103A06A-3A76-45D2-AC52-ADD033B474C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5103A06A-3A76-45D2-AC52-ADD033B474C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{420EDDA0-2085-4827-ABD6-1F4BE045802C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{420EDDA0-2085-4827-ABD6-1F4BE045802C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420EDDA0-2085-4827-ABD6-1F4BE045802C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420EDDA0-2085-4827-ABD6-1F4BE045802C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,7 @@ Global
 		{1E0D858A-BF93-43C6-8B61-6CF4F0E34920} = {3FAE7B23-3DE8-484B-97FB-75530BE65CE4}
 		{8BFBC210-7FBC-4BD0-9FCF-519A52177754} = {BCE3E388-DAD1-45E9-B906-1224E6251390}
 		{5103A06A-3A76-45D2-AC52-ADD033B474C6} = {BCE3E388-DAD1-45E9-B906-1224E6251390}
+		{420EDDA0-2085-4827-ABD6-1F4BE045802C} = {6E2FADDE-112C-4B0C-94C8-7BE552579FCE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD576C93-FE41-4B42-AD59-9D3681B7B052}

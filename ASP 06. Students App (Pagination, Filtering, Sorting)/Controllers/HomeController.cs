@@ -1,11 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using ASP_05._ASP_Filters.Models;
-using ASP_05._ASP_Filters.Filters;
+using ASP_06._Students_App__Pagination__Filtering__Sorting_.Models;
 
-namespace ASP_05._ASP_Filters.Controllers;
+namespace ASP_06._Students_App__Pagination__Filtering__Sorting_.Controllers;
 
-//[TypeFilter(typeof(ApiKeyQueryAuthorization))]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -15,23 +13,12 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    [LastEnterDate]
     public IActionResult Index()
     {
-        //throw new KeyNotFoundException();
-        return View();
-    }
-    [DateTimeExec]
-    public IActionResult Privacy()
-    {
-        //throw new KeyNotFoundException();
-        //int numb = 0;
-        //int numb2 = 25 / numb;
         return View();
     }
 
-    [TypeFilter(typeof(MyAuthorizationFilter))]
-    public IActionResult Welcome()
+    public IActionResult Privacy()
     {
         return View();
     }
