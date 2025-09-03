@@ -1,8 +1,9 @@
-﻿using ASP_07._ToDo_Web_API_DTO.DTOs;
-using ASP_07._ToDo_Web_API_DTO.Services;
+﻿using ASP_08._ToDo_Web_API_Pagination.DTOs;
+using ASP_08._ToDo_Web_API_Pagination.DTOs.Pagination;
+using ASP_08._ToDo_Web_API_Pagination.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASP_07._ToDo_Web_API_DTO.Controllers;
+namespace ASP_08._ToDo_Web_API_Pagination.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,9 +18,16 @@ public class ToDoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ToDoItemDTO>>> Get()
+    public async Task<ActionResult<PaginationListDTO<ToDoItemDTO>>> Get(
+        [FromQuery] PaginationRequest request,
+        [FromQuery] ToDoQueryFilters queryFilters
+        )
     {
-        return (await _service.GetToDoItemsAsync()).ToArray();
+        return await _service.GetToDoItemsAsync(
+            request.Page, 
+            request.PageSize,
+            queryFilters.Search,
+            queryFilters.IsCompleted);
     }
 
     [HttpGet("{id}")]

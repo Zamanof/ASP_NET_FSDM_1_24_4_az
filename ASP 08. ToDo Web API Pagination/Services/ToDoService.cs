@@ -1,8 +1,10 @@
-﻿using ASP_07._ToDo_Web_API_DTO.Data;
-using ASP_07._ToDo_Web_API_DTO.DTOs;
-using ASP_07._ToDo_Web_API_DTO.Models;
+﻿using ASP_08._ToDo_Web_API_Pagination.Data;
+using ASP_08._ToDo_Web_API_Pagination.DTOs;
+using ASP_08._ToDo_Web_API_Pagination.DTOs.Pagination;
+using ASP_08._ToDo_Web_API_Pagination.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace ASP_07._ToDo_Web_API_DTO.Services;
+namespace ASP_08._ToDo_Web_API_Pagination.Services;
 
 public class ToDoService : IToDoService
 {
@@ -50,10 +52,33 @@ public class ToDoService : IToDoService
         return Task.FromResult(ConvertToDoItemDTO(item!));
     }
 
-    public Task<IEnumerable<ToDoItemDTO>> GetToDoItemsAsync()
+    public async Task<PaginationListDTO<ToDoItemDTO>> GetToDoItemsAsync(
+        int page,
+        int pageSize,
+        string? search,
+        bool? isCompleted)
     {
-        var items = _context.ToDoItems.ToList();        
-        return Task.FromResult(items.Select(ConvertToDoItemDTO));
+        IQueryable<ToDoItem> query = _context.ToDoItems;
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(item => item.Text.ToLower().Contains(search));
+        }
+
+        if (isCompleted.HasValue)
+        {
+            query = query.Where(item => item.IsCompleted == isCompleted);
+        }
+        var items = await query
+            .Skip((page-1)*pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        
+
+        return new PaginationListDTO<ToDoItemDTO>(
+            items.Select(item=> ConvertToDoItemDTO(item)),
+            new PaginationMeta(page, pageSize, query.Count())
+            );
     }
 
     private ToDoItemDTO ConvertToDoItemDTO(ToDoItem item)
