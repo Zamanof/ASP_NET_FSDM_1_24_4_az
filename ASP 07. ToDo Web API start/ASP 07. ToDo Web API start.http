@@ -1,0 +1,6 @@
+@ASP_07._ToDo_Web_API_start_HostAddress = http://localhost:5099
+
+GET {{ASP_07._ToDo_Web_API_start_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

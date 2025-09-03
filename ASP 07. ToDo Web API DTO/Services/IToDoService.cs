@@ -1,5 +1,4 @@
 ﻿using ASP_07._ToDo_Web_API_DTO.DTOs;
-using ASP_07._ToDo_Web_API_DTO.Models;
 namespace ASP_07._ToDo_Web_API_DTO.Services;
 
 public interface IToDoService
