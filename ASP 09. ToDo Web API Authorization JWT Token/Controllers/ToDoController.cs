@@ -1,6 +1,7 @@
 ﻿using ASP_09._ToDo_Web_API_Authorization_JWT_Token.DTOs;
 using ASP_09._ToDo_Web_API_Authorization_JWT_Token.DTOs.Pagination;
 using ASP_09._ToDo_Web_API_Authorization_JWT_Token.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_09._ToDo_Web_API_Authorization_JWT_Token.Controllers;
@@ -11,6 +12,19 @@ namespace ASP_09._ToDo_Web_API_Authorization_JWT_Token.Controllers;
 [ApiController]
 public class ToDoController : ControllerBase
 {
+
+    // admin
+    // moderator
+    // user
+    // guest
+
+    // Edit, Delete, Create, View
+    // permissions: CanEdit, CanDelete, CanCreate, CanView
+
+    // admin(CanEdit, CanDelete, CanCreate, CanView)
+    // moderator(CanEdit, CanView)
+    // user(CanView)
+    // guest
 
     private readonly IToDoService _service;
     /// <summary>
@@ -28,6 +42,8 @@ public class ToDoController : ControllerBase
     /// <param name="queryFilters"></param>
     /// <returns></returns>
     [HttpGet]
+    // [Authorize(Roles = "admin, moderator, user, x")]
+    //[Authorize(Policy ="CanView")]
     public async Task<ActionResult<PaginationListDTO<ToDoItemDTO>>> Get(
         [FromQuery] PaginationRequest request,
         [FromQuery] ToDoQueryFilters queryFilters
@@ -45,6 +61,7 @@ public class ToDoController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
+    //[Authorize(Policy ="CanView")]
     public async Task<ActionResult<ToDoItemDTO>> Get(int id)
     {
         var item = await _service.GetToDoItemAsync(id);
@@ -59,6 +76,8 @@ public class ToDoController : ControllerBase
     /// <response code="409">Task already created</response>
     /// <response code="403">Forbiden</response>
     [HttpPost]
+    //[Authorize(Policy ="CanCreate")]
+
     public async Task<ActionResult<ToDoItemDTO>> Post([FromBody] CreateToDoItemRequest request)
     {
         return await _service.CreateToDoAsync(request);

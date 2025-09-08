@@ -5,6 +5,10 @@ namespace ASP_08._ToDo_Web_API_Pagination.DTOs.Pagination;
 
 public class PaginationRequest
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <example>1</example>
     [Required]
     [FromQuery(Name = "page")]
     [Range(1, int.MaxValue)]
