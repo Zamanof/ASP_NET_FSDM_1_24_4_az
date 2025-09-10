@@ -57,6 +57,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 09", "ASP 09", "{73B57C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP 09. ToDo Web API Authorization JWT Token", "ASP 09. ToDo Web API Authorization JWT Token\ASP 09. ToDo Web API Authorization JWT Token.csproj", "{47E47B11-00BD-4957-9891-648E82BCC01E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP NET 11. Identity. Refresh token", "ASP NET 11. Identity. Refresh token\ASP NET 11. Identity. Refresh token.csproj", "{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 11", "ASP 11", "{1425EA58-7BD1-4BA5-8793-62FBAA85EE8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +139,10 @@ Global
 		{47E47B11-00BD-4957-9891-648E82BCC01E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47E47B11-00BD-4957-9891-648E82BCC01E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47E47B11-00BD-4957-9891-648E82BCC01E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +166,7 @@ Global
 		{D0FCAA99-E815-4E0B-AFB9-AA73A5A3702B} = {8E6698BC-C2A2-4F2F-A452-8E729B0D4071}
 		{F37F5752-F026-4BD2-8DE6-BB84694337A8} = {7F78135C-A0B5-4891-9C72-BDA21076CF41}
 		{47E47B11-00BD-4957-9891-648E82BCC01E} = {73B57C8C-6EBB-4A11-B500-F552880433DE}
+		{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5} = {1425EA58-7BD1-4BA5-8793-62FBAA85EE8D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD576C93-FE41-4B42-AD59-9D3681B7B052}

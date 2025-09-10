@@ -1,6 +1,6 @@
-using ASP_09._ToDo_Web_API_Authorization_JWT_Token.Data;
-using ASP_09._ToDo_Web_API_Authorization_JWT_Token.DTOs.Auth;
-using ASP_09._ToDo_Web_API_Authorization_JWT_Token.Services;
+using ASP_NET_11._Identity._Refresh_token.Data;
+using ASP_NET_11._Identity._Refresh_token.DTOs.Auth;
+using ASP_NET_11._Identity._Refresh_token.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -65,7 +65,7 @@ builder.Services.AddSwaggerGen(
                 Version = "v 2.0",
             });
         setup
-        .IncludeXmlComments(@"obj\Debug\net8.0\ASP 09. ToDo Web API Authorization JWT Token.xml");
+        .IncludeXmlComments(@"obj\Debug\net8.0\ASP NET 11. Identity. Refresh token.xml");
         setup.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
         {
             Name = "Authorization",
