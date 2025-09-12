@@ -1,6 +1,8 @@
 using ASP_NET_11._Identity._Refresh_token.Data;
 using ASP_NET_11._Identity._Refresh_token.DTOs.Auth;
+using ASP_NET_11._Identity._Refresh_token.Models;
 using ASP_NET_11._Identity._Refresh_token.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -13,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<ToDoContext>();
+
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -23,8 +28,8 @@ builder.Services.AddAuthentication("Bearer")
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ClockSkew = TimeSpan.Zero,
-            ValidIssuer = "https://localhost:5069",
-            ValidAudience = "https://localhost:5069",
+            ValidIssuer = "https://localhost:5130",
+            ValidAudience = "https://localhost:5130",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ElektrikleshdirebildiklerimizdensinizmiElektrikleshdirebildiklerimizdensinizmi"))
         };
     });

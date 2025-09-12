@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP_NET_11._Identity._Refresh_token.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    [Migration("202501074427_Initial")]
+    [Migration("20250901074427_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

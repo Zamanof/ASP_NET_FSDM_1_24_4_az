@@ -6,7 +6,7 @@ namespace ASP_NET_11._Identity._Refresh_token.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy ="CanTest")]
+    //[Authorize(Policy ="CanTest")]
     public class TestController : ControllerBase
     {
         [HttpGet("test")]
