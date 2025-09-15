@@ -1,5 +1,6 @@
 ﻿using ASP_NET_12._Refactroing._Autorization.DTOs.Auth;
 using ASP_NET_12._Refactroing._Autorization.Models;
+using ASP_NET_12._Refactroing._Autorization.Services.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,13 +19,16 @@ public class AuthController : ControllerBase
 
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly IJwtService _jwtService;
 
     public AuthController(
         UserManager<AppUser> userManager,
-        SignInManager<AppUser> signInManager)
+        SignInManager<AppUser> signInManager,
+        IJwtService jwtService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _jwtService = jwtService;
     }
 
 
@@ -45,26 +49,9 @@ public class AuthController : ControllerBase
 
         var roles = await _userManager.GetRolesAsync(user);
 
-        var userClaims = await _userManager.GetClaimsAsync(user);
+        var userClaims = await _userManager.GetClaimsAsync(user);        
 
-        var claims = new[]
-        {
-            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email!),
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles))
-        }.Concat(userClaims);
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ElektrikleshdirebildiklerimizdensinizmiElektrikleshdirebildiklerimizdensinizmi"));
-
-        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var accessToken = new JwtSecurityToken(
-            issuer: "https://localhost:5130",
-            audience: "https://localhost:5130",
-            expires: DateTime.UtcNow.AddMinutes(120),
-            signingCredentials: signingCredentials,
-            claims: claims);
-
-        var tokenValue = new JwtSecurityTokenHandler().WriteToken(accessToken);
+        var accessToken = _jwtService.GenerateSecurityToken(user.Id, user.Email!, roles, userClaims);
 
         var refreshToken = Guid.NewGuid().ToString("N").ToLower();
 
@@ -75,7 +62,7 @@ public class AuthController : ControllerBase
 
         return new AuthTokenDTO
         {
-            Token = tokenValue,
+            Token = accessToken,
             RefreshToken = refreshToken
         };
     }
@@ -100,38 +87,9 @@ public class AuthController : ControllerBase
 
         var result = await _userManager.CreateAsync(user, request.Password);
 
-        if (!result.Succeeded) return BadRequest(result.Errors);
+        if (!result.Succeeded) return BadRequest(result.Errors);        
 
-        var roles = await _userManager.GetRolesAsync(user);
-
-        var userClaims = await _userManager.GetClaimsAsync(user);
-
-        var claims = new[]
-        {
-            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email!),
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles))
-        }.Concat(userClaims);
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ElektrikleshdirebildiklerimizdensinizmiElektrikleshdirebildiklerimizdensinizmi"));
-
-        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var accessToken = new JwtSecurityToken(
-            issuer: "https://localhost:5130",
-            audience: "https://localhost:5130",
-            expires: DateTime.UtcNow.AddMinutes(120),
-            signingCredentials: signingCredentials,
-            claims: claims);
-
-        var tokenValue = new JwtSecurityTokenHandler().WriteToken(accessToken);
-
-        await _userManager.UpdateAsync(user);
-
-        return new AuthTokenDTO
-        {
-            Token = tokenValue,
-            RefreshToken = user.RefreshToken
-        };
+        return await GenerateToken(user);
     }
 
     /// <summary>
@@ -145,37 +103,26 @@ public class AuthController : ControllerBase
         var user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == request.RefreshToken);
         if (user is null) return Unauthorized();
 
+        return await GenerateToken(user);
+    }
+
+
+    private async Task<AuthTokenDTO> GenerateToken(AppUser user)
+    {
         var roles = await _userManager.GetRolesAsync(user);
 
         var userClaims = await _userManager.GetClaimsAsync(user);
 
-        var claims = new[]
-        {
-            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email!),
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles))
-        }.Concat(userClaims);
+        var accessToken = _jwtService.GenerateSecurityToken(user.Id, user.Email!, roles, userClaims);
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ElektrikleshdirebildiklerimizdensinizmiElektrikleshdirebildiklerimizdensinizmi"));
-
-        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var accessToken = new JwtSecurityToken(
-            issuer: "https://localhost:5130",
-            audience: "https://localhost:5130",
-            expires: DateTime.UtcNow.AddMinutes(120),
-            signingCredentials: signingCredentials,
-            claims: claims);
-
-        var tokenValue = new JwtSecurityTokenHandler().WriteToken(accessToken);
-
-        var refreshToken = user.RefreshToken;
+        var refreshToken = Guid.NewGuid().ToString("N").ToLower();
+        user.RefreshToken = refreshToken;
 
         await _userManager.UpdateAsync(user);
 
-
         return new AuthTokenDTO
         {
-            Token = tokenValue,
+            Token = accessToken,
             RefreshToken = refreshToken
         };
 

@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ASP_NET_12._Refactroing._Autorization</RootNamespace>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <DocumentationFile>\bin\Debug\net8.0\Documentation.xml</DocumentationFile>
   </PropertyGroup>
 
 	<ItemGroup>

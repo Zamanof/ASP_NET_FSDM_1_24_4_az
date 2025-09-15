@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
 
-namespace ASP_NET_12._Refactroing._Autorization.DTOs.Auth;
+namespace ASP_NET_12._Refactroing._Autorization.Auth;
 
 public class CanTestRequirment
     : IAuthorizationRequirement, IAuthorizationHandler

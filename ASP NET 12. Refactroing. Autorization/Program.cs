@@ -1,3 +1,4 @@
+using ASP_NET_12._Refactroing._Autorization;
 using ASP_NET_12._Refactroing._Autorization.Auth;
 using ASP_NET_12._Refactroing._Autorization.Data;
 using ASP_NET_12._Refactroing._Autorization.DTOs.Auth;
@@ -17,62 +18,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AuthenticationAndAuthorization(builder.Configuration);
 
-var jwtConfig = new JwtConfig();
-builder.Configuration.Bind("JWT", jwtConfig);
-builder.Services.AddSingleton(jwtConfig);
-
-builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<ToDoContext>();
-
-
-// builder.Services.AuthenticationAndAuthorization(builder.Configuration);
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ClockSkew = TimeSpan.Zero,
-            ValidIssuer = jwtConfig.Issuer,
-            ValidAudience = jwtConfig.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ElektrikleshdirebildiklerimizdensinizmiElektrikleshdirebildiklerimizdensinizmi"))
-        };
-    });
-
-builder.Services.AddAuthorization(
-    options =>
-    {
-        options.AddPolicy("CanTest", policy =>
-        {
-            policy.RequireAuthenticatedUser();
-            //policy.RequireClaim("CanTest");
-            policy.Requirements.Add(new CanTestRequirment());
-        });
-
-        options.AddPolicy("CanCreate", policy =>
-        {
-            policy.RequireAuthenticatedUser();
-            //policy.RequireClaim("CanTest");
-            policy.Requirements.Add(new CanCreateRequirment());
-        });
-        options.AddPolicy("SomeRequirment", policy =>
-        {
-            policy.RequireAuthenticatedUser();
-            //policy.RequireClaim("CanTest");
-            policy.Requirements.Add(new CanTestRequirment());
-            policy.Requirements.Add(new CanCreateRequirment());
-        });
-    });
-
-
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 builder.Services.AddScoped<IToDoService, ToDoService>();
+
 builder.Services.AddDbContext<ToDoContext>(
     options =>
     {

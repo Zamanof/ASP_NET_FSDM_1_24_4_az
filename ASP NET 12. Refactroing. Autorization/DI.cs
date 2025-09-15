@@ -1,4 +1,14 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using ASP_NET_12._Refactroing._Autorization.Auth;
+using ASP_NET_12._Refactroing._Autorization.Data;
+using ASP_NET_12._Refactroing._Autorization.DTOs.Auth;
+using ASP_NET_12._Refactroing._Autorization.Models;
+using ASP_NET_12._Refactroing._Autorization.Providers;
+using ASP_NET_12._Refactroing._Autorization.Services.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace ASP_NET_12._Refactroing._Autorization;
 
@@ -15,8 +25,9 @@ public static class DI
                 Title = "ToDo",
                 Version = "v 2.0",
             });
+        var filePath = Path.Combine(AppContext.BaseDirectory, "Documentation.xml");
         setup
-        .IncludeXmlComments(@"obj\Debug\net8.0\ASP NET 11. Identity. Refresh token.xml");
+        .IncludeXmlComments(filePath);
         setup.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
         {
             Name = "Authorization",
@@ -43,8 +54,61 @@ public static class DI
     );
         return services;
     }
-    
+
+    public static IServiceCollection AuthenticationAndAuthorization(
+        this IServiceCollection services,
+        IConfiguration configuration
+        )
+    {
+
+        services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<ToDoContext>();
+
+        services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IRequestUserProvider, RequestUserProvider>();
+
+
+        var jwtConfig = new JwtConfig();
+        configuration.Bind("JWT", jwtConfig);
+        services.AddSingleton(jwtConfig);
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.Zero,
+            ValidIssuer = jwtConfig.Issuer,
+            ValidAudience = jwtConfig.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Secret))
+        };
+    });
+
+        services.AddAuthorization(
+            options =>
+            {
+
+                options.AddPolicy("CanTest", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    //policy.RequireClaim("CanTest");
+                    policy.Requirements.Add(new CanTestRequirment());
+                    policy.Requirements.Add(new CanCreateRequirment());                });
+            });
+
+        return services;
+    }
+
     // extension methods
     // AuthenticationAndAuthorization
-   
+
 }

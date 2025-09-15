@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP_NET_12._Refactroing._Autorization.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    [Migration("20250910064212_IdentityMigration")]
+    [Migration("20250915074642_IdentityMigration")]
     partial class IdentityMigration
     {
         /// <inheritdoc />
@@ -46,7 +46,13 @@ namespace ASP_NET_12._Refactroing._Autorization.Migrations
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ToDoItems");
                 });
@@ -268,6 +274,17 @@ namespace ASP_NET_12._Refactroing._Autorization.Migrations
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 
+            modelBuilder.Entity("ASP_NET_12._Refactroing._Autorization.Models.ToDoItem", b =>
+                {
+                    b.HasOne("ASP_NET_12._Refactroing._Autorization.Models.AppUser", "User")
+                        .WithMany("ToDoItems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -317,6 +334,11 @@ namespace ASP_NET_12._Refactroing._Autorization.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ASP_NET_12._Refactroing._Autorization.Models.AppUser", b =>
+                {
+                    b.Navigation("ToDoItems");
                 });
 #pragma warning restore 612, 618
         }

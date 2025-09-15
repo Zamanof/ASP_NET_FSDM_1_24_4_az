@@ -15,9 +15,9 @@ public class ToDoService : IToDoService
         _context = context;
     }
 
-    public Task<ToDoItemDTO> ChangeToDoItemStatusAsync(int id, bool isCompleted)
+    public Task<ToDoItemDTO> ChangeToDoItemStatusAsync(string userId, int id, bool isCompleted)
     {
-        var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id);
+        var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id && t.UserId == userId);
 
         if (item is null) return null!;
 
@@ -30,35 +30,43 @@ public class ToDoService : IToDoService
 
     }
 
-    public Task<ToDoItemDTO> CreateToDoAsync(CreateToDoItemRequest request)
+    public async Task<ToDoItemDTO> CreateToDoAsync(string userId, CreateToDoItemRequest request)
     {
+        var user = await _context.Users.FindAsync(userId);
+
+        if (user is null) throw new KeyNotFoundException();
+
+        var now = DateTime.UtcNow;
+
         var item = new ToDoItem()
         {
             Text = request.Text,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow,
-            IsCompleted = false
+            CreatedAt = now,
+            UpdatedAt = now,
+            IsCompleted = false,
+            UserId = userId
         };
-        _context.ToDoItems.Add(item);
-        _context.SaveChanges();
+        item = _context.ToDoItems.Add(item).Entity;
+        await _context.SaveChangesAsync();
         
-        return Task.FromResult(ConvertToDoItemDTO(item));
+        return ConvertToDoItemDTO(item);
     }
 
-    public Task<ToDoItemDTO> GetToDoItemAsync(int id)
+    public async Task<ToDoItemDTO> GetToDoItemAsync(string userId, int id)
     {
-        var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id);
+        var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id && t.UserId == userId);
         
-        return Task.FromResult(ConvertToDoItemDTO(item!));
+        return item is not null ? ConvertToDoItemDTO(item!): null!;
     }
 
     public async Task<PaginationListDTO<ToDoItemDTO>> GetToDoItemsAsync(
+        string userId,
         int page,
         int pageSize,
         string? search,
         bool? isCompleted)
     {
-        IQueryable<ToDoItem> query = _context.ToDoItems;
+        IQueryable<ToDoItem> query = _context.ToDoItems.Where(t=> t.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
         {
