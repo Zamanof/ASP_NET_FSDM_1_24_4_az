@@ -1,10 +1,10 @@
-﻿using ASP_NET_12._Refactroing._Autorization.DTOs;
-using ASP_NET_12._Refactroing._Autorization.DTOs.Pagination;
-using ASP_NET_12._Refactroing._Autorization.Providers;
-using ASP_NET_12._Refactroing._Autorization.Services;
+﻿using ASP_16._Validation._Fluent_Validation.DTOs;
+using ASP_16._Validation._Fluent_Validation.DTOs.Pagination;
+using ASP_16._Validation._Fluent_Validation.Providers;
+using ASP_16._Validation._Fluent_Validation.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASP_NET_12._Refactroing._Autorization.Controllers;
+namespace ASP_16._Validation._Fluent_Validation.Controllers;
 /// <summary>
 /// 
 /// </summary>

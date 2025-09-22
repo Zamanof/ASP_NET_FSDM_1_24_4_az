@@ -1,11 +1,11 @@
-﻿using ASP_NET_12._Refactroing._Autorization.Auth;
+﻿using ASP_16._Validation._Fluent_Validation.Auth;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 
-namespace ASP_NET_12._Refactroing._Autorization.Services.Auth;
+namespace ASP_16._Validation._Fluent_Validation.Services.Auth;
 
 public class JwtService : IJwtService
 {

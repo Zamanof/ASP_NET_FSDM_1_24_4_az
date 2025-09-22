@@ -1,0 +1,6 @@
+@ASP_16._Validation._Fluent_Validation_HostAddress = http://localhost:5107
+
+GET {{ASP_16._Validation._Fluent_Validation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

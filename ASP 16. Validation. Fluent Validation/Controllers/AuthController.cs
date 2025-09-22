@@ -1,11 +1,11 @@
-﻿using ASP_NET_12._Refactroing._Autorization.DTOs.Auth;
-using ASP_NET_12._Refactroing._Autorization.Models;
-using ASP_NET_12._Refactroing._Autorization.Services.Auth;
+﻿using ASP_16._Validation._Fluent_Validation.DTOs.Auth;
+using ASP_16._Validation._Fluent_Validation.Models;
+using ASP_16._Validation._Fluent_Validation.Services.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ASP_NET_12._Refactroing._Autorization.Controllers;
+namespace ASP_16._Validation._Fluent_Validation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

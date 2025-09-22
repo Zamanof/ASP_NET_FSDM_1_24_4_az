@@ -1,6 +1,10 @@
-using ASP_NET_12._Refactroing._Autorization;
-using ASP_NET_12._Refactroing._Autorization.Data;
-using ASP_NET_12._Refactroing._Autorization.Services;
+using ASP_16._Validation._Fluent_Validation;
+using ASP_16._Validation._Fluent_Validation.Data;
+using ASP_16._Validation._Fluent_Validation.DTOs.Auth;
+using ASP_16._Validation._Fluent_Validation.DTOs.Validation;
+using ASP_16._Validation._Fluent_Validation.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +28,15 @@ builder.Services.AddDbContext<ToDoContext>(
                                 .GetConnectionString("TODO_DBContext"));
     }
     );
+
+builder.Services.AddFluentValidationAutoValidation();
+
+//builder.Services
+//    .AddScoped<IValidator<RegisterRequest>, RegisterRequestValidator>();
+//builder.Services
+//    .AddScoped<IValidator<LoginRequest>, LoginRequestValidator>();
+
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>();
 
 var app = builder.Build();
 

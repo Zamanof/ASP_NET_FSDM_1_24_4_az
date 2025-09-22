@@ -65,6 +65,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 12", "ASP 12", "{ACA964
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP NET 12. Refactroing. Autorization", "ASP NET 12. Refactroing. Autorization\ASP NET 12. Refactroing. Autorization.csproj", "{3FC5A78A-01F3-44F1-AC6B-E45E84658644}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 16", "ASP 16", "{85360981-D9FA-4E7A-ABD2-F6A5E4B4D15D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP 16. Validation. Fluent Validation", "ASP 16. Validation. Fluent Validation\ASP 16. Validation. Fluent Validation.csproj", "{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +155,10 @@ Global
 		{3FC5A78A-01F3-44F1-AC6B-E45E84658644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FC5A78A-01F3-44F1-AC6B-E45E84658644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FC5A78A-01F3-44F1-AC6B-E45E84658644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +184,7 @@ Global
 		{47E47B11-00BD-4957-9891-648E82BCC01E} = {73B57C8C-6EBB-4A11-B500-F552880433DE}
 		{FAD12EB5-6865-4CC5-8E4B-BF210D9B05F5} = {1425EA58-7BD1-4BA5-8793-62FBAA85EE8D}
 		{3FC5A78A-01F3-44F1-AC6B-E45E84658644} = {ACA9643D-AD50-4CB2-82C9-2F3340DD7B93}
+		{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED} = {85360981-D9FA-4E7A-ABD2-F6A5E4B4D15D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD576C93-FE41-4B42-AD59-9D3681B7B052}

@@ -1,16 +1,16 @@
-﻿using ASP_NET_12._Refactroing._Autorization.Auth;
-using ASP_NET_12._Refactroing._Autorization.Data;
-using ASP_NET_12._Refactroing._Autorization.DTOs.Auth;
-using ASP_NET_12._Refactroing._Autorization.Models;
-using ASP_NET_12._Refactroing._Autorization.Providers;
-using ASP_NET_12._Refactroing._Autorization.Services.Auth;
+﻿using ASP_16._Validation._Fluent_Validation.Auth;
+using ASP_16._Validation._Fluent_Validation.Data;
+using ASP_16._Validation._Fluent_Validation.DTOs.Auth;
+using ASP_16._Validation._Fluent_Validation.Models;
+using ASP_16._Validation._Fluent_Validation.Providers;
+using ASP_16._Validation._Fluent_Validation.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
-namespace ASP_NET_12._Refactroing._Autorization;
+namespace ASP_16._Validation._Fluent_Validation;
 
 public static class DI
 {
