@@ -69,6 +69,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 16", "ASP 16", "{853609
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP 16. Validation. Fluent Validation", "ASP 16. Validation. Fluent Validation\ASP 16. Validation. Fluent Validation.csproj", "{0455FAA3-41A3-4DEA-B381-6E589C2BE8ED}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP 17", "ASP 17", "{0DFE5CBC-F46C-4A5E-8772-4A787BEA1DF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
