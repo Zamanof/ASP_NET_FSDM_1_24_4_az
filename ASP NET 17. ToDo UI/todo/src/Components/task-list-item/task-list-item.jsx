@@ -10,7 +10,7 @@ const TaskListItem = ({text, isCompleted, onChecked, onDeleted}) => {
     }, [isCompleted]);
 
     const onClickText = ()=>{
-        const newStatus = !isCompleted;
+        const newStatus = !isComplete;
         setIsComplete(newStatus);
         onChecked(newStatus)
     }
