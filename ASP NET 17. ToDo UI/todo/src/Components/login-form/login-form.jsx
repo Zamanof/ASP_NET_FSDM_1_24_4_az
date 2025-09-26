@@ -18,6 +18,7 @@ const LoginForm=()=>{
        service.login(e, email,password).then((status)=>{
            if(status === 200){
                console.log(status);
+               navigate('/todo');
            }
 
        })

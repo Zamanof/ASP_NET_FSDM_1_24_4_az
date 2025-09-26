@@ -17,7 +17,7 @@ const RegisterForm=()=>{
     const login = (e)=>{
         service.register(e, email, password).then(status=>{
             if (status === 200){
-                console.log(status);
+                navigate("/todo");
             }
         });
     }
