@@ -28,14 +28,14 @@ const RegisterForm=()=>{
                 <h1>Todo Sign Up</h1>
                 <form>
                     <p>
-                        <label className="form-label" htmlFor={"mail"}>Email </label>
+                        <label className="form-label" htmlFor={"mail"}>Email</label>
                     </p>
                     <p>
                         <input
                             id="mail" type="email" name={"email"}
                             placeholder="Email" className="form-control"
-                        value={email} onChange={emailChange}
-                            onInput={emailChange} onPaste={passwordChange}/>
+                            value={email} onChange={emailChange}
+                            onInput={emailChange} onPaste={emailChange}/>
                     </p>
                     <p>
                         <label className="form-label" htmlFor={"pass"}>Password </label>
@@ -44,7 +44,7 @@ const RegisterForm=()=>{
                         <input
                             id="pass" type="password" name={"password"}
                             placeholder="Password" className="form-control"
-                        value={password} onChange={passwordChange}
+                            value={password} onChange={passwordChange}
                             onInput={passwordChange} onPaste={passwordChange}/>
                     </p>
 

@@ -1,5 +1,6 @@
 import './search-input.css'
 import {useState} from "react";
+// eslint-disable-next-line react/prop-types
 const  SearchInput = ({placeText, onSearchChange})=>{
     const [searchText, setSearchText] = useState("")
 

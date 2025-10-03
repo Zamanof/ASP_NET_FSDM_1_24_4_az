@@ -1,0 +1,6 @@
+@ASP_20._Logging_Cashing_HostAddress = http://localhost:5036
+
+GET {{ASP_20._Logging_Cashing_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

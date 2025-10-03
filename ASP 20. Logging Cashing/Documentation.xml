@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASP 20. Logging Cashing</name>
+    </assembly>
+    <members>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.AuthController.Login(ASP_20._Logging_Cashing.DTOs.Auth.LoginRequest)">
+            <summary>
+            Login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.AuthController.Register(ASP_20._Logging_Cashing.DTOs.Auth.RegisterRequest)">
+            <summary>
+            Register
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.AuthController.Refresh(ASP_20._Logging_Cashing.DTOs.Auth.RefreshTokenRequest)">
+            <summary>
+            Refresh
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.Controllers.ToDoController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.ToDoController.#ctor(ASP_20._Logging_Cashing.Services.IToDoService,ASP_20._Logging_Cashing.Providers.IRequestUserProvider)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.ToDoController.Get(ASP_20._Logging_Cashing.DTOs.Pagination.PaginationRequest,ASP_20._Logging_Cashing.DTOs.ToDoQueryFilters)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <param name="queryFilters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.ToDoController.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.ToDoController.Post(ASP_20._Logging_Cashing.DTOs.CreateToDoItemRequest)">
+            <summary>
+            Create ToDo Item
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="201">Success</response>
+            <response code="401">Task already created</response>
+            <response code="403">Forbiden</response>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Controllers.ToDoController.Patch(System.Int32,System.Boolean)">
+            <summary>
+            Change ToDo item
+            </summary>
+            <param name="id"></param>
+            <param name="isCompleted"></param>
+            <returns>ToDo item with changed status</returns>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.DI.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Auth.AuthTokenDTO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Auth.AuthTokenDTO.Token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Auth.AuthTokenDTO.RefreshToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Auth.LoginRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Auth.RefreshTokenRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Auth.RegisterRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationMeta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationMeta.Page">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationMeta.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationMeta.TotalPages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationMeta.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method for calculating meta information about pagination
+            </summary>
+            <param name="page">number of current page</param>
+            <param name="pageSize">How many items per page</param>
+            <param name="totalCount">How many pages</param>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationRequest">
+            <summary>
+            Pagination request
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationRequest.Page">
+            <summary>
+            Page Number
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.DTOs.Pagination.PaginationRequest.PageSize">
+            <summary>
+            Page size - Property for count of items per one page
+            </summary>
+            <example>10</example>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Validation.LoginRequestValidator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.DTOs.Validation.LoginRequestValidator.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Validation.RegisterRequestValidator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.DTOs.Validation.RegisterRequestValidator.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.DTOs.Validation.ValidationRulesExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.DTOs.Validation.ValidationRulesExtensions.Password``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ruleBuilder"></param>
+            <param name="mustContainsLowerCase"></param>
+            <param name="mustContainsUpperCase"></param>
+            <param name="mustContainsDigit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.Migrations.IdentityMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Migrations.IdentityMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Migrations.IdentityMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Migrations.IdentityMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.Models.AppUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.Models.AppUser.RefreshToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.Providers.IRequestUserProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Providers.IRequestUserProvider.GetUserInfo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.Providers.RequestUserProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_20._Logging_Cashing.Providers.UserInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.Providers.UserInfo.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_20._Logging_Cashing.Providers.UserInfo.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_20._Logging_Cashing.Providers.UserInfo.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="userName"></param>
+        </member>
+    </members>
+</doc>
