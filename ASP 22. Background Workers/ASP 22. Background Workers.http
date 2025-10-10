@@ -1,0 +1,6 @@
+@ASP_22._Background_Workers_HostAddress = http://localhost:5181
+
+GET {{ASP_22._Background_Workers_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

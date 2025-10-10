@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using Serilog;
 
-namespace ASP_20._Logging_Cashing.Controllers;
+namespace ASP_22._Background_Workers.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -36,6 +36,7 @@ public class TestController : ControllerBase
                 SlidingExpiration = TimeSpan.FromSeconds(5),
                 Priority = CacheItemPriority.High
             });
+            _logger.Log(LogLevel.Critical, "It's ok-> 200");
             return Ok(data);
         }
 
