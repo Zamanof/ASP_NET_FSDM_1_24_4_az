@@ -8,22 +8,20 @@ namespace ASP_22._Background_Workers.DTOs.Pagination;
 public class PaginationRequest
 {
     /// <summary>
-    /// Page Number
+    /// Page number
     /// </summary>
     /// <example>1</example>
     [Required]
-    [FromQuery(Name = "page")]
+    [FromQuery(Name ="page")]
     [Range(1, int.MaxValue)]
-    public int Page { get; set; } = 1;
-    
+    public int Page {  get; set; } = 1;
+
     /// <summary>
-    /// Page size - Property for count of items per one page
+    /// Page size - How many items in one page
     /// </summary>
     /// <example>10</example>
-    
     [Required]
     [FromQuery(Name = "pageSize")]
     [Range(1, int.MaxValue)]
     public int PageSize { get; set; } = 10;
-
 }

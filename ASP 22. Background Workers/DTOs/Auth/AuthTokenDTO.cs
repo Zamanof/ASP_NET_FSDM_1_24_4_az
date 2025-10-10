@@ -1,15 +1,7 @@
 ﻿namespace ASP_22._Background_Workers.DTOs.Auth;
-/// <summary>
-/// 
-/// </summary>
-public class AuthTokenDTO
+
+public class AuthTokenDto
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public string Token { get; set; }
-    /// <summary>
-    /// 
-    /// </summary>
+    public string AccessToken { get; set; }
     public string RefreshToken { get; set; }
 }

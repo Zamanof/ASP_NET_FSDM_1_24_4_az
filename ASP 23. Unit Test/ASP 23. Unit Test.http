@@ -1,0 +1,6 @@
+@ASP_23._Unit_Test_HostAddress = http://localhost:5145
+
+GET {{ASP_23._Unit_Test_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

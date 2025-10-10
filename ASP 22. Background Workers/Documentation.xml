@@ -4,32 +4,24 @@
         <name>ASP 22. Background Workers</name>
     </assembly>
     <members>
+        <member name="T:ASP_22._Background_Workers.Controllers.AuthController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:ASP_22._Background_Workers.Controllers.AuthController.Login(ASP_22._Background_Workers.DTOs.Auth.LoginRequest)">
             <summary>
-            Login
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ASP_22._Background_Workers.Controllers.AuthController.Register(ASP_22._Background_Workers.DTOs.Auth.RegisterRequest)">
-            <summary>
-            Register
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ASP_22._Background_Workers.Controllers.AuthController.Refresh(ASP_22._Background_Workers.DTOs.Auth.RefreshTokenRequest)">
-            <summary>
-            Refresh
+            
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
         <member name="T:ASP_22._Background_Workers.Controllers.ToDoController">
             <summary>
-            
+            ToDo API main Controller
             </summary>
         </member>
-        <member name="M:ASP_22._Background_Workers.Controllers.ToDoController.#ctor(ASP_22._Background_Workers.Services.IToDoService,ASP_22._Background_Workers.Providers.IRequestUserProvider,Microsoft.Extensions.Logging.ILogger{ASP_22._Background_Workers.Controllers.ToDoController})">
+        <member name="M:ASP_22._Background_Workers.Controllers.ToDoController.#ctor(ASP_22._Background_Workers.Services.IToDoService,ASP_22._Background_Workers.Providers.IRequestUserProvider)">
             <summary>
             
             </summary>
@@ -40,7 +32,7 @@
             
             </summary>
             <param name="request"></param>
-            <param name="queryFilters"></param>
+            <param name="filters"></param>
             <returns></returns>
         </member>
         <member name="M:ASP_22._Background_Workers.Controllers.ToDoController.Get(System.Int32)">
@@ -55,18 +47,43 @@
             Create ToDo Item
             </summary>
             <param name="request"></param>
-            <returns></returns>
             <response code="201">Success</response>
-            <response code="401">Task already created</response>
+            <response code="409">Task already created</response>
             <response code="403">Forbiden</response>
         </member>
         <member name="M:ASP_22._Background_Workers.Controllers.ToDoController.Patch(System.Int32,System.Boolean)">
             <summary>
-            Change ToDo item
+            Change ToDo Item Status
             </summary>
             <param name="id"></param>
             <param name="isCompleted"></param>
-            <returns>ToDo item with changed status</returns>
+            <returns>ToDo Item with changed status</returns>
+        </member>
+        <member name="T:ASP_22._Background_Workers.Data.ToDoContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_22._Background_Workers.Data.ToDoContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ASP_22._Background_Workers.Data.ToDoContext})">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>  
+        </member>
+        <member name="P:ASP_22._Background_Workers.Data.ToDoContext.ToDoItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_22._Background_Workers.Data.ToDoContext.AppUsers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_22._Background_Workers.Data.ToDoContext.Transactions">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:ASP_22._Background_Workers.DI.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -75,22 +92,25 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="T:ASP_22._Background_Workers.DTOs.Auth.AuthTokenDTO">
+        <member name="M:ASP_22._Background_Workers.DI.AuthenticationAndAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             
             </summary>
-        </member>
-        <member name="P:ASP_22._Background_Workers.DTOs.Auth.AuthTokenDTO.Token">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ASP_22._Background_Workers.DTOs.Auth.AuthTokenDTO.RefreshToken">
-            <summary>
-            
-            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
         </member>
         <member name="T:ASP_22._Background_Workers.DTOs.Auth.LoginRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_22._Background_Workers.DTOs.Auth.LoginRequest.Email">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_22._Background_Workers.DTOs.Auth.LoginRequest.Password">
             <summary>
             
             </summary>
@@ -100,10 +120,43 @@
             
             </summary>
         </member>
-        <member name="T:ASP_22._Background_Workers.DTOs.Auth.RegisterRequest">
+        <member name="P:ASP_22._Background_Workers.DTOs.Auth.RefreshTokenRequest.RefreshToken">
             <summary>
             
             </summary>
+        </member>
+        <member name="T:ASP_22._Background_Workers.DTOs.CreateToDoItemRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_22._Background_Workers.DTOs.CreateToDoItemRequest.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_22._Background_Workers.DTOs.Pagination.PaginationListDto`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ASP_22._Background_Workers.DTOs.Pagination.PaginationListDto`1.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_22._Background_Workers.DTOs.Pagination.PaginationListDto`1.Meta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_22._Background_Workers.DTOs.Pagination.PaginationListDto`1.#ctor(System.Collections.Generic.IEnumerable{`0},ASP_22._Background_Workers.DTOs.Pagination.PaginationMeta)">
+            <summary>
+            
+            </summary>
+            <param name="items"></param>
+            <param name="meta"></param>
         </member>
         <member name="T:ASP_22._Background_Workers.DTOs.Pagination.PaginationMeta">
             <summary>
@@ -127,11 +180,11 @@
         </member>
         <member name="M:ASP_22._Background_Workers.DTOs.Pagination.PaginationMeta.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Method for calculating meta information about pagination
+            
             </summary>
-            <param name="page">number of current page</param>
-            <param name="pageSize">How many items per page</param>
-            <param name="totalCount">How many pages</param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="totalCount"></param>
         </member>
         <member name="T:ASP_22._Background_Workers.DTOs.Pagination.PaginationRequest">
             <summary>
@@ -140,51 +193,39 @@
         </member>
         <member name="P:ASP_22._Background_Workers.DTOs.Pagination.PaginationRequest.Page">
             <summary>
-            Page Number
+            Page number
             </summary>
             <example>1</example>
         </member>
         <member name="P:ASP_22._Background_Workers.DTOs.Pagination.PaginationRequest.PageSize">
             <summary>
-            Page size - Property for count of items per one page
+            Page size - How many items in one page
             </summary>
             <example>10</example>
         </member>
-        <member name="T:ASP_22._Background_Workers.DTOs.Validation.LoginRequestValidator">
-            <summary>
-            
-            </summary>
+        <member name="T:ASP_22._Background_Workers.Migrations.Initial">
+            <inheritdoc />
         </member>
-        <member name="M:ASP_22._Background_Workers.DTOs.Validation.LoginRequestValidator.#ctor">
-            <summary>
-            
-            </summary>
+        <member name="M:ASP_22._Background_Workers.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
         </member>
-        <member name="T:ASP_22._Background_Workers.DTOs.Validation.RegisterRequestValidator">
-            <summary>
-            
-            </summary>
+        <member name="M:ASP_22._Background_Workers.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
         </member>
-        <member name="M:ASP_22._Background_Workers.DTOs.Validation.RegisterRequestValidator.#ctor">
-            <summary>
-            
-            </summary>
+        <member name="M:ASP_22._Background_Workers.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
-        <member name="T:ASP_22._Background_Workers.DTOs.Validation.ValidationRulesExtensions">
-            <summary>
-            
-            </summary>
+        <member name="T:ASP_22._Background_Workers.Migrations.AddTransaction">
+            <inheritdoc />
         </member>
-        <member name="M:ASP_22._Background_Workers.DTOs.Validation.ValidationRulesExtensions.Password``1(FluentValidation.IRuleBuilder{``0,System.String},System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="ruleBuilder"></param>
-            <param name="mustContainsLowerCase"></param>
-            <param name="mustContainsUpperCase"></param>
-            <param name="mustContainsDigit"></param>
-            <returns></returns>
+        <member name="M:ASP_22._Background_Workers.Migrations.AddTransaction.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_22._Background_Workers.Migrations.AddTransaction.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_22._Background_Workers.Migrations.AddTransaction.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
         <member name="T:ASP_22._Background_Workers.Migrations.IdentityMigration">
             <inheritdoc />
@@ -208,43 +249,53 @@
             
             </summary>
         </member>
-        <member name="T:ASP_22._Background_Workers.Providers.IRequestUserProvider">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:ASP_22._Background_Workers.Providers.IRequestUserProvider.GetUserInfo">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:ASP_22._Background_Workers.Providers.RequestUserProvider">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:ASP_22._Background_Workers.Providers.UserInfo">
             <summary>
             
             </summary>
         </member>
-        <member name="P:ASP_22._Background_Workers.Providers.UserInfo.Id">
+        <member name="T:ASP_22._Background_Workers.Services.ToDoService">
             <summary>
             
             </summary>
         </member>
-        <member name="P:ASP_22._Background_Workers.Providers.UserInfo.UserName">
+        <member name="M:ASP_22._Background_Workers.Services.ToDoService.#ctor(ASP_22._Background_Workers.Data.ToDoContext)">
             <summary>
             
             </summary>
+            <param name="context"></param>
         </member>
-        <member name="M:ASP_22._Background_Workers.Providers.UserInfo.#ctor(System.String,System.String)">
+        <member name="M:ASP_22._Background_Workers.Services.ToDoService.ChangeToDoItemStatusAsync(System.String,System.Int32,System.Boolean)">
             <summary>
             
             </summary>
             <param name="id"></param>
-            <param name="userName"></param>
+            <param name="isCompleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_22._Background_Workers.Services.ToDoService.CreateToDoAsync(System.String,ASP_22._Background_Workers.DTOs.CreateToDoItemRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_22._Background_Workers.Services.ToDoService.GetToDoItemAsync(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_22._Background_Workers.Services.ToDoService.GetToDoItemsAsync(System.String,System.Int32,System.Int32,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="search"></param>
+            <param name="isCompleted"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

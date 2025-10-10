@@ -1,5 +1,4 @@
 ﻿namespace ASP_22._Background_Workers.Models;
-
 public class ToDoItem
 {
     public int Id { get; set; }

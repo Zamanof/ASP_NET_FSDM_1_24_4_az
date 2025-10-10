@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using Serilog;
+using System.Collections.Concurrent;
+
 
 namespace ASP_22._Background_Workers.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize(Policy = "CanTest")]
+//[Authorize(Policy ="CanTest")]
 public class TestController : ControllerBase
 {
     private readonly ILogger<TestController> _logger;
@@ -18,33 +21,33 @@ public class TestController : ControllerBase
         _memoryCache = memoryCache;
     }
 
-    //[ResponseCache(Duration =30)]
+    //[ResponseCache(Duration = 30)]
     [HttpGet("test")]
     public async Task<ActionResult> Test()
     {
-        if (_memoryCache.TryGetValue("cashed_data", out var cashedData))
+        if (_memoryCache.TryGetValue("cached_data", out var cachedData))
         {
-            return Ok(cashedData);
+            return Ok(cachedData);
         }
         else
         {
             await Task.Delay(3000);
-            var data = "It Works";
-            _memoryCache.Set("cashed_data", data, new MemoryCacheEntryOptions
+            var data = "It works";
+            _memoryCache.Set("cached_data", data, new MemoryCacheEntryOptions
             {
-                //AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10),
+                AbsoluteExpirationRelativeToNow =  TimeSpan.FromSeconds(10),
                 SlidingExpiration = TimeSpan.FromSeconds(5),
                 Priority = CacheItemPriority.High
             });
-            _logger.Log(LogLevel.Critical, "It's ok-> 200");
             return Ok(data);
-        }
 
-            //await Task.Delay(3000);
-            _logger.Log(LogLevel.Information, "It's ok-> 200");
-        _logger.LogCritical("Uy daaa-> 555");
-        _logger.LogCritical(new NullReferenceException(), "Null");
-        //Log.Information("It's ok-> 200");
-        return Ok("It works");
+        }
+        //await Task.Delay(3000);
+        //_logger.Log(LogLevel.Information, "It's ok-> 200");
+        //_logger.LogCritical("It's ok-> 200");
+        //_logger.LogCritical(new NullReferenceException(), "Null");
+        //throw new NotImplementedException();
+
+        return Ok("It works!!!");
     }
 }

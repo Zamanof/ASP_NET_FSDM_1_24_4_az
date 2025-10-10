@@ -5,37 +5,49 @@ using ASP_22._Background_Workers.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASP_22._Background_Workers.Services;
-
+/// <summary>
+/// 
+/// </summary>
 public class ToDoService : IToDoService
 {
     private readonly ToDoContext _context;
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
     public ToDoService(ToDoContext context)
     {
         _context = context;
     }
-
-    public Task<ToDoItemDTO> ChangeToDoItemStatusAsync(string userId, int id, bool isCompleted)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="isCompleted"></param>
+    /// <returns></returns>
+    public Task<ToDoItemDto> ChangeToDoItemStatusAsync(string userId, int id, bool isCompleted)
     {
-        var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id && t.UserId == userId);
-
-        if (item is null) return null!;
-
-        item.IsCompleted = isCompleted;
-        item.UpdatedAt = DateTimeOffset.UtcNow;
-
+        var toDo = _context.ToDoItems.FirstOrDefault(x => x.Id == id && x.UserId == userId);
+        if (toDo is null) return null!;
+        toDo.IsCompleted = isCompleted;
+        toDo.UpdatedAt = DateTime.UtcNow;
         _context.SaveChanges();
-
-        return Task.FromResult(ConvertToDoItemDTO(item));
-
+        return Task.FromResult(ConvertToDoItemDto(toDo));
     }
-
-    public async Task<ToDoItemDTO> CreateToDoAsync(string userId, CreateToDoItemRequest request)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public async Task<ToDoItemDto> CreateToDoAsync(
+        string userId, 
+        CreateToDoItemRequest request)
     {
         var user = await _context.Users.FindAsync(userId);
-
-        if (user is null) throw new KeyNotFoundException();
-
+        if (user is null)
+        {
+            throw new KeyNotFoundException();
+        }
         var now = DateTime.UtcNow;
 
         var item = new ToDoItem()
@@ -48,18 +60,29 @@ public class ToDoService : IToDoService
         };
         item = _context.ToDoItems.Add(item).Entity;
         await _context.SaveChangesAsync();
-        
-        return ConvertToDoItemDTO(item);
+        return ConvertToDoItemDto(item);
     }
-
-    public async Task<ToDoItemDTO> GetToDoItemAsync(string userId, int id)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<ToDoItemDto> GetToDoItemAsync(string userId, int id)
     {
-        var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id && t.UserId == userId);
-        
-        return item is not null ? ConvertToDoItemDTO(item!): null!;
+        var item = await _context.ToDoItems.FirstOrDefaultAsync(t=> t.Id == id && t.UserId == userId);
+        return item is not null
+                ?ConvertToDoItemDto(item)
+                :null!;
     }
-
-    public async Task<PaginationListDTO<ToDoItemDTO>> GetToDoItemsAsync(
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="page"></param>
+    /// <param name="pageSize"></param>
+    /// <param name="search"></param>
+    /// <param name="isCompleted"></param>
+    /// <returns></returns>
+    public async Task<PaginationListDto<ToDoItemDto>> GetToDoItemsAsync(
         string userId,
         int page,
         int pageSize,
@@ -67,37 +90,33 @@ public class ToDoService : IToDoService
         bool? isCompleted)
     {
         IQueryable<ToDoItem> query = _context.ToDoItems.Where(t=> t.UserId == userId);
-
         if (!string.IsNullOrWhiteSpace(search))
         {
-            query = query.Where(item => item.Text.ToLower().Contains(search));
+            query = query.Where(item=> item.Text.ToLower().Contains(search));
         }
-
         if (isCompleted.HasValue)
         {
             query = query.Where(item => item.IsCompleted == isCompleted);
         }
+
         var items = await query
-            .Skip((page-1)*pageSize)
+            .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
-
-        
-        return new PaginationListDTO<ToDoItemDTO>(
-            items.Select(item=> ConvertToDoItemDTO(item)),
-            new PaginationMeta(page, pageSize, query.Count())
-            );
+        return new PaginationListDto<ToDoItemDto>(
+            items.Select(item=> ConvertToDoItemDto(item)), 
+            new PaginationMeta(page, pageSize, query.Count()));
     }
 
-    private ToDoItemDTO ConvertToDoItemDTO(ToDoItem item)
+    private ToDoItemDto ConvertToDoItemDto(ToDoItem item)
     {
-        ToDoItemDTO todoItem = new()
+        var toDoItemDto = new ToDoItemDto()
         {
             Id = item.Id,
             Text = item.Text,
             CreatedAt = item.CreatedAt,
             IsCompleted = item.IsCompleted
         };
-        return todoItem;
+        return toDoItemDto;
     }
 }

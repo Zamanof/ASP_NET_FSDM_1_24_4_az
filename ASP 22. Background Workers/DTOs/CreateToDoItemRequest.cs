@@ -1,7 +1,11 @@
-﻿namespace ASP_22._Background_Workers.DTOs
+﻿namespace ASP_22._Background_Workers.DTOs;
+/// <summary>
+/// 
+/// </summary>
+public class CreateToDoItemRequest
 {
-    public class CreateToDoItemRequest
-    {
-        public string Text { get; set; }
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Text { get; set; }
 }

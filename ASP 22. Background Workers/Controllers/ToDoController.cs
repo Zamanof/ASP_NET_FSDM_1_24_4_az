@@ -1,4 +1,5 @@
-﻿using ASP_22._Background_Workers.DTOs;
+﻿
+using ASP_22._Background_Workers.DTOs;
 using ASP_22._Background_Workers.DTOs.Pagination;
 using ASP_22._Background_Workers.Providers;
 using ASP_22._Background_Workers.Services;
@@ -6,65 +7,61 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_22._Background_Workers.Controllers;
+
+// admin
+// moderator
+// user
+// guest
+
+// admin (CanEdit, CanDelete, CanCreate, CanView)
+// moderator  (CanEdit, CanView)
+// user  (CanView)
+// guest
+// permissons CanEdit, CanDelete, CanCreate, CanView
+
+
 /// <summary>
-/// 
+/// ToDo API main Controller
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
 public class ToDoController : ControllerBase
 {
-
-    // admin
-    // moderator
-    // user
-    // guest
-
-    // Edit, Delete, Create, View
-    // permissions: CanEdit, CanDelete, CanCreate, CanView
-
-    // admin(CanEdit, CanDelete, CanCreate, CanView)
-    // moderator(CanEdit, CanView)
-    // user(CanView)
-    // guest
-
     private readonly IToDoService _service;
     private readonly IRequestUserProvider _userProvider;
-    private readonly ILogger _logger;
 
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="service"></param>
-    public ToDoController(IToDoService service, IRequestUserProvider userProvider, ILogger<ToDoController> logger)
+    public ToDoController(IToDoService service, IRequestUserProvider userProvider)
     {
         _service = service;
         _userProvider = userProvider;
-        _logger = logger;
     }
     /// <summary>
     /// 
     /// </summary>
     /// <param name="request"></param>
-    /// <param name="queryFilters"></param>
+    /// <param name="filters"></param>
     /// <returns></returns>
     [HttpGet]
-    // [Authorize(Roles = "admin, moderator, user, x")]
-    //[Authorize(Policy ="CanView")]
-    public async Task<ActionResult<PaginationListDTO<ToDoItemDTO>>> Get(
+    //[Authorize(Policy = "CanView")]
+    //[Authorize(Roles ="admin, moderator, user")]
+    public async Task<ActionResult<PaginationListDto<ToDoItemDto>>> Get(
         [FromQuery] PaginationRequest request,
-        [FromQuery] ToDoQueryFilters queryFilters
-        )
+        [FromQuery] ToDoQueryFilters filters)
     {
         var user = _userProvider.GetUserInfo();
-
         return await _service.GetToDoItemsAsync(
             user.Id,
-            request.Page, 
+            request.Page,
             request.PageSize,
-            queryFilters.Search,
-            queryFilters.IsCompleted);
+            filters.Search,
+            filters.isCompleted
+            );
     }
     /// <summary>
     /// 
@@ -73,84 +70,90 @@ public class ToDoController : ControllerBase
     /// <returns></returns>
     [HttpGet("{id}")]
     //[Authorize(Policy ="CanView")]
-    public async Task<ActionResult<ToDoItemDTO>> Get(int id)
+    public async Task<ActionResult<ToDoItemDto>> Get(
+        int id)
     {
         var user = _userProvider.GetUserInfo();
-
         var item = await _service.GetToDoItemAsync(user.Id, id);
-
         return item is not null ? item : NotFound();
     }
+
+
     /// <summary>
     /// Create ToDo Item
     /// </summary>
     /// <param name="request"></param>
-    /// <returns></returns>
     /// <response code="201">Success</response>
-    /// <response code="401">Task already created</response>
+    /// <response code="409">Task already created</response>
     /// <response code="403">Forbiden</response>
     [HttpPost]
-    //[Authorize(Policy ="CanCreate")]
-
-    public async Task<ActionResult<ToDoItemDTO>> Post([FromBody] CreateToDoItemRequest request)
+    //[Authorize(Roles = "admin")]
+    //[Authorize(Policy = "CanCreate")]
+    public async Task<ActionResult<ToDoItemDto>> Post(
+        [FromBody] CreateToDoItemRequest request)
     {
         var user = _userProvider.GetUserInfo();
-        _logger.Log(LogLevel.Critical, "Created");
-        return await _service.CreateToDoAsync(user.Id, request);
+        var createdItem = await _service.CreateToDoAsync(user.Id, request);
+        return  createdItem;
     }
+
+
     /// <summary>
-    /// Change ToDo item
+    /// Change ToDo Item Status
     /// </summary>
     /// <param name="id"></param>
     /// <param name="isCompleted"></param>
-    /// <returns>ToDo item with changed status</returns>
+    /// <returns>ToDo Item with changed status</returns>
     [HttpPatch("{id}/status")]
-    public async Task<ActionResult<ToDoItemDTO>> Patch(int id, [FromBody] bool isCompleted)
+    //[Authorize(Roles ="admin, moderator")]
+    //[Authorize(Policy = "CanEdit")]
+    public async Task<ActionResult<ToDoItemDto>> Patch(
+        int id, 
+        [FromBody] bool isCompleted)
     {
         var user = _userProvider.GetUserInfo();
-        var todoItem = await _service.ChangeToDoItemStatusAsync(user.Id, id, isCompleted);
-
-        return todoItem is not null ? todoItem : NotFound();
+        var toDoItem = await _service.ChangeToDoItemStatusAsync(user.Id, id, isCompleted);
+        return toDoItem is not null ? toDoItem: NotFound();
     }
 }
 
+
 /*
- MVC:
+ * MVC:
     Create:
-        GET         /products/create        -> html
-        POST        /products/create        -> html
+        GET      /products/create           -> html
+        POST     /products/create           -> html
     
     Update:
-        GET         /products/update/{id}   -> html
-        POST        /products/update/{id}   -> html
+        GET      /products/update/{id}      -> html
+        POST     /products/update/{id}      -> html
 
     Delete:
-        GET         /products/delete/{id}   -> html
-        POST        /products/delete/{id}   -> html
+        GET      /products/delete/{id}      -> html
+        POST     /products/delete/{id}      -> html
 
     GetAll:
-        GET         /products/index         -> html
+        GET      /products/index            -> html
 
     GetOne:
-        GET         /products/index/{id}    -> html
+        GET      /products/index/{id}       -> html
 
 
-API:
+* API:
     Create:
-        POST        /products               -> json
-    
-    Update:
-        PUT        /products/{id}           -> json
+       POST     /products                   -> json
 
-    Delete:
-        DELETE      /products/{id}          -> json
+    Update:                                    
+       PATCH    /products/{id}              -> json
 
-    GetAll:
-        GET         /products               -> json
-
-    GetOne:
-        GET         /products/{id}          -> json
-
-
-
+    Delete:                                    
+       DELETE     /products/{id}            -> json
+                                               
+    GetAll:                                    
+        GET      /products                  -> json
+                                               
+    GetOne:                                    
+        GET      /products/{id}             -> json
+ 
+ 
  */

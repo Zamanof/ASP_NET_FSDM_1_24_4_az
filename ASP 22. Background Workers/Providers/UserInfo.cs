@@ -1,25 +1,12 @@
 ﻿namespace ASP_22._Background_Workers.Providers;
-
 /// <summary>
 /// 
 /// </summary>
 public class UserInfo
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public string Id { get;}
+    public string Id {  get;}
+    public string UserName {  get;}
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public string UserName { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="userName"></param>
     public UserInfo(string id, string userName)
     {
         Id = id;

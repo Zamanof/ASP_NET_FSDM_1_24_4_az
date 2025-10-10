@@ -4,6 +4,12 @@
 /// </summary>
 public class LoginRequest
 {
-    public string Email {  get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Email { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public string Password { get; set; }
 }

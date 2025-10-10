@@ -3,10 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json;
 
 namespace ASP_22._Background_Workers.Services.Auth;
-
 public class JwtService : IJwtService
 {
     private readonly JwtConfig _jwtConfig;
@@ -17,26 +15,16 @@ public class JwtService : IJwtService
     }
 
     public string GenerateSecurityToken(
-        string id, 
-        string email, 
+        string id, string email, 
         IEnumerable<string> roles, 
         IEnumerable<Claim> userClaims)
     {
         var claims = new[]
-        {
-            new Claim(ClaimsIdentity.DefaultNameClaimType, email),
+       {
+            new Claim (ClaimsIdentity.DefaultNameClaimType, email),
             new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles)),
-            new Claim("userId", id),
-            new Claim("permissions", JsonSerializer.Serialize(new[]
-                {
-                    "CanTest",
-                    "CanDelete",
-                    "CanEdit",
-                    "CanView",
-                    "CanCreate"
-                }))
+            new Claim("userId", id)
         }.Concat(userClaims);
-
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Secret));
 
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -46,8 +34,10 @@ public class JwtService : IJwtService
             audience: _jwtConfig.Audience,
             expires: DateTime.UtcNow.AddMinutes(_jwtConfig.Expiration),
             signingCredentials: signingCredentials,
-            claims: claims);
+            claims: claims
+            );
 
-        return new JwtSecurityTokenHandler().WriteToken(accessToken);
+        return new JwtSecurityTokenHandler()
+                               .WriteToken(accessToken);
     }
 }

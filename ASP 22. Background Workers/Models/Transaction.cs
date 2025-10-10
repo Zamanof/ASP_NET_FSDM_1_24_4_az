@@ -2,6 +2,8 @@
 
 public class Transaction
 {
-    public int Id { get; set; }
-    public string Data { get; set; }
+    public int Id {  get; set; }
+    public string Data {  get; set; }
+    public TransctionStatus Status { get; set; }
+
 }

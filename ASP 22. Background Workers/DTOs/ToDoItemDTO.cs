@@ -1,6 +1,6 @@
 ﻿namespace ASP_22._Background_Workers.DTOs;
 
-public class ToDoItemDTO
+public class ToDoItemDto
 {
     public int Id { get; set; }
     public string Text { get; set; } = string.Empty;

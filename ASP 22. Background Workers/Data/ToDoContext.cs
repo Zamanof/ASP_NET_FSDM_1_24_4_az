@@ -3,16 +3,27 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASP_22._Background_Workers.Data;
-
+/// <summary>
+/// 
+/// </summary>
 public class ToDoContext : IdentityDbContext
-{
-    public ToDoContext(DbContextOptions<ToDoContext> options) 
-        : base(options)
+{     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="options"></param>  
+    public ToDoContext(DbContextOptions<ToDoContext> options) : base(options)
     {}
-
-    public DbSet<ToDoItem> ToDoItems 
-                                => Set<ToDoItem>();
-
-    public DbSet<AppUser> AppUsers 
-        => Set<AppUser>();
+    /// <summary>
+    /// 
+    /// </summary>
+    public DbSet<ToDoItem> ToDoItems => Set<ToDoItem>();
+    /// <summary>
+    /// 
+    /// </summary>
+    public DbSet<AppUser> AppUsers => Set<AppUser>();
+    /// <summary>
+    /// 
+    /// </summary>
+    public DbSet<Transaction> Transactions => Set<Transaction>();
 }

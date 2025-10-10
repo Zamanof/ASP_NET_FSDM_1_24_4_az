@@ -1,41 +1,22 @@
-﻿using ASP_22._Background_Workers.DTOs.Auth;
-using FluentValidation;
+﻿using FluentValidation;
+using ASP_22._Background_Workers.DTOs.Auth;
 using System.Text.RegularExpressions;
-
 namespace ASP_22._Background_Workers.DTOs.Validation;
 
-/// <summary>
-/// 
-/// </summary>
+
 public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public RegisterRequestValidator()
     {
-        RuleFor(x => x.Email)
-            .EmailAddress()
-            .NotEmpty();
-        //RuleFor(x => x.Password)
-        //    .Must(BeValidPassword)
-        //    .MinimumLength(8)
-        //    .NotEmpty();
-
-        //RuleFor(x => x.Password)
-        //   .Must(SharedValidator.BeValidPassword)
-        //   .MinimumLength(8)
-        //   .NotEmpty();
-
-        RuleFor(x => x.Password)
-           .Password(mustContainsDigit:false)
-           .MinimumLength(8)
-           .NotEmpty();
+        RuleFor(x => x.Email).EmailAddress().NotEmpty();
+        //RuleFor(x => x.Password).MinimumLength(8).Must(BeValidPassword).NotEmpty();
+        //RuleFor(x => x.Password).MinimumLength(8).Must(SaharedValidator.BeValidPassword).NotEmpty();
+        RuleFor(x=>x.Password).MinimumLength(8).Password(mustContainsDigit:false).NotEmpty();
     }
 
     //private bool BeValidPassword(string password)
     //{
-    //    return new Regex(@"\d").IsMatch(password)
+    //    return new Regex(@"\d").IsMatch(password) 
     //        && new Regex(@"[a-z]").IsMatch(password)
     //        && new Regex(@"[A-Z]").IsMatch(password);
     //}

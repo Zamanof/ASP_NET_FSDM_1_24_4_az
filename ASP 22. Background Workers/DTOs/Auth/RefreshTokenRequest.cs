@@ -4,5 +4,8 @@
 /// </summary>
 public class RefreshTokenRequest
 {
-    public string RefreshToken { get; set; } = string.Empty;
+    /// <summary>
+    /// 
+    /// </summary>
+    public string RefreshToken {  get; set; } = string.Empty;
 }
