@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASP 23. Unit Test</name>
+    </assembly>
+    <members>
+        <member name="T:ASP_23._Unit_Test.Controllers.AuthController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Controllers.AuthController.Login(ASP_23._Unit_Test.DTOs.Auth.LoginRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ASP_23._Unit_Test.Controllers.ToDoController">
+            <summary>
+            ToDo API main Controller
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Controllers.ToDoController.#ctor(ASP_23._Unit_Test.Services.IToDoService,ASP_23._Unit_Test.Providers.IRequestUserProvider)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Controllers.ToDoController.Get(ASP_23._Unit_Test.DTOs.Pagination.PaginationRequest,ASP_23._Unit_Test.DTOs.ToDoQueryFilters)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Controllers.ToDoController.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Controllers.ToDoController.Post(ASP_23._Unit_Test.DTOs.CreateToDoItemRequest)">
+            <summary>
+            Create ToDo Item
+            </summary>
+            <param name="request"></param>
+            <response code="201">Success</response>
+            <response code="409">Task already created</response>
+            <response code="403">Forbiden</response>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Controllers.ToDoController.Patch(System.Int32,System.Boolean)">
+            <summary>
+            Change ToDo Item Status
+            </summary>
+            <param name="id"></param>
+            <param name="isCompleted"></param>
+            <returns>ToDo Item with changed status</returns>
+        </member>
+        <member name="T:ASP_23._Unit_Test.Data.ToDoContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Data.ToDoContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ASP_23._Unit_Test.Data.ToDoContext})">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>  
+        </member>
+        <member name="P:ASP_23._Unit_Test.Data.ToDoContext.ToDoItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.Data.ToDoContext.AppUsers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.Data.ToDoContext.Transactions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.DI.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_23._Unit_Test.DI.AuthenticationAndAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ASP_23._Unit_Test.DTOs.Auth.LoginRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Auth.LoginRequest.Email">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Auth.LoginRequest.Password">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_23._Unit_Test.DTOs.Auth.RefreshTokenRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Auth.RefreshTokenRequest.RefreshToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_23._Unit_Test.DTOs.CreateToDoItemRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.CreateToDoItemRequest.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_23._Unit_Test.DTOs.Pagination.PaginationListDto`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationListDto`1.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationListDto`1.Meta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.DTOs.Pagination.PaginationListDto`1.#ctor(System.Collections.Generic.IEnumerable{`0},ASP_23._Unit_Test.DTOs.Pagination.PaginationMeta)">
+            <summary>
+            
+            </summary>
+            <param name="items"></param>
+            <param name="meta"></param>
+        </member>
+        <member name="T:ASP_23._Unit_Test.DTOs.Pagination.PaginationMeta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationMeta.Page">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationMeta.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationMeta.TotalPages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.DTOs.Pagination.PaginationMeta.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="totalCount"></param>
+        </member>
+        <member name="T:ASP_23._Unit_Test.DTOs.Pagination.PaginationRequest">
+            <summary>
+            Pagination request
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationRequest.Page">
+            <summary>
+            Page number
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:ASP_23._Unit_Test.DTOs.Pagination.PaginationRequest.PageSize">
+            <summary>
+            Page size - How many items in one page
+            </summary>
+            <example>10</example>
+        </member>
+        <member name="T:ASP_23._Unit_Test.Migrations.Initial">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ASP_23._Unit_Test.Migrations.AddTransaction">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.AddTransaction.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.AddTransaction.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.AddTransaction.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ASP_23._Unit_Test.Migrations.IdentityMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.IdentityMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.IdentityMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ASP_23._Unit_Test.Migrations.IdentityMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ASP_23._Unit_Test.Models.AppUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ASP_23._Unit_Test.Models.AppUser.RefreshToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_23._Unit_Test.Providers.UserInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ASP_23._Unit_Test.Services.ToDoService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Services.ToDoService.#ctor(ASP_23._Unit_Test.Data.ToDoContext,ASP_23._Unit_Test.Services.IEmailSender)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Services.ToDoService.ChangeToDoItemStatusAsync(System.String,System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="isCompleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Services.ToDoService.CreateToDoAsync(System.String,ASP_23._Unit_Test.DTOs.CreateToDoItemRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Services.ToDoService.GetToDoItemAsync(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ASP_23._Unit_Test.Services.ToDoService.GetToDoItemsAsync(System.String,System.Int32,System.Int32,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="search"></param>
+            <param name="isCompleted"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
