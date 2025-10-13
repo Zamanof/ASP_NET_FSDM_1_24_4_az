@@ -68,7 +68,7 @@ public class ToDoService : IToDoService
         item = _context.ToDoItems.Add(item).Entity;
         await _context.SaveChangesAsync();
 
-        await _emailSender.SendEmail(user.Email, "Salam", "New Todo item added");
+        await _emailSender.SendEmail(user.Email, item.Text, "New Todo item added");
 
         return ConvertToDoItemDto(item);
     }
